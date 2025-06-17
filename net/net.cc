@@ -2,6 +2,7 @@
 #include "net/net.h"
 
 #include <arpa/inet.h>
+#include <errno.h>
 #include <fcntl.h>
 #include <stdlib.h>
 #include <sys/socket.h>
@@ -73,11 +74,40 @@ int SetBlockingMode(int sock, bool blocking) {
   return status;
 }
 
+int Accept(int sockfd, struct sockaddr* addr, socklen_t* addrlen) {
+  DCHECK_GE(sockfd, 0);
+  int status = 0;
+  do {
+    status = accept(sockfd, addr, addrlen);
+  } while ((status == -1) && (errno == EINTR));
+  return status;
+}
+
 int Listen(int sock, int backlog) {
   DCHECK_GE(sock, 0);
   DCHECK_GE(backlog, 0);
   const int status = listen(sock, backlog);
   PLOG_IF(ERROR, status != 0) << "listen() failed";
+  return status;
+}
+
+int Read(int fd, void* buf, size_t size) {
+  DCHECK_GE(fd, 0);
+  DCHECK(buf != nullptr);
+  int status = 0;
+  do {
+    status = read(fd, buf, size);
+  } while ((status == -1) && (errno == EINTR));
+  return status;
+}
+
+int Write(int fd, void* buf, size_t size) {
+  DCHECK_GE(fd, 0);
+  DCHECK(buf != nullptr);
+  int status = 0;
+  do {
+    status = write(fd, buf, size);
+  } while ((status == -1) && (errno == EINTR));
   return status;
 }
 

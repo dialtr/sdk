@@ -38,6 +38,7 @@ class EpollFd {
 
   // Constant that can be used in Wait() to wait forever.
   const int kWaitForever = -1;
+
   // Wait for activity on one or more epoll descriptors.
   int Wait(struct epoll_event* events, int maxevents, int timeout_ms);
 

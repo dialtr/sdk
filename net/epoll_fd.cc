@@ -1,6 +1,7 @@
 // Copyright (C) 2025 The sdk authors. All rights reserved.
 #include "net/epoll_fd.h"
 
+#include <errno.h>
 #include <sys/epoll.h>
 #include <unistd.h>
 
@@ -44,7 +45,11 @@ int EpollFd::Delete(int fd) {
 int EpollFd::Wait(struct epoll_event* events, int maxevents, int timeout_ms) {
   DCHECK_GE(epfd_, 0);
   DCHECK_NE(events, nullptr);
-  return epoll_wait(epfd_, events, maxevents, timeout_ms);
+  int status = 0;
+  do {
+    status = epoll_wait(epfd_, events, maxevents, timeout_ms);
+  } while ((status == -1) && (errno == EINTR));
+  return status;
 }
 
 }  // namespace net
