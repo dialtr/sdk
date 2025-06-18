@@ -3,13 +3,15 @@ cc_library(
 			"//visibility:public",
 		],
     name = "net",
+		hdrs = [
+			"closer.h",
+			"epoll_fd.h",
+			"net.h",
+		],
 		srcs = [
 			  "closer.cc",
-				"closer.h",
 				"epoll_fd.cc",
-			  "epoll_fd.h",
 			  "net.cc",
-			  "net.h",
 		],
 		deps = [
 			  "@abseil-cpp//absl/log:check",

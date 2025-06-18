@@ -19,7 +19,7 @@ Hash::~Hash() {
 }
 
 absl::Status Hash::Update(const void* data, size_t len) {
-	DCHECK(data != nullptr) << "the data pointer can't be null";
+  DCHECK(data != nullptr) << "the data pointer can't be null";
   return absl::OkStatus();
 }
 
