@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Run clang-format on C++ header and implementation files (*.h, *.cc).
+# Format according to Google coding standards.
+
+HEADER_COUNT=`ls *.h 2> /dev/null | wc -l`
+SOURCE_COUNT=`ls *.cc 2> /dev/null | wc -l`
+
+if [ "$HEADER_COUNT" -gt "0" ]; then
+	clang-format -style=Google -i *.h
+fi
+
+if [ "$SOURCE_COUNT" -gt "0" ]; then
+	clang-format -style=Google -i *.cc
+fi
+
