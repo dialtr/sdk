@@ -22,7 +22,7 @@ class Hash {
   static absl::StatusOr<Hash*> New(const Hash::Options& options);
 
 	// Update the hash with new data.
-  virtual absl::Status Update(const void* data, size_t len) = 0;
+  virtual int Update(const void* data, size_t len) = 0;
 
   // Finish the hashing operation. Updates are no longer possible.
   virtual absl::StatusOr<sdk::base::Buffer> Finalize() = 0;

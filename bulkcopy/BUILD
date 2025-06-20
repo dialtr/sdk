@@ -4,14 +4,13 @@ cc_binary(
 		],
     name = "bulkcopy",
 		srcs = [
-			  "buffer.cc",
-				"buffer.h",
 			  "main.cc",
 		],
 		deps = [
 			  "@abseil-cpp//absl/log:check",
 				"@abseil-cpp//absl/log:log",
 			  "@abseil-cpp//absl/status:status",
+				"//base:buffer",
 		],
 )
 

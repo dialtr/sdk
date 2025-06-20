@@ -1,5 +1,7 @@
 cc_import(
-	name = "openssl",
+	name = "ssl",
+	alwayslink = True,
+	system_provided = True,
 )
 
 cc_library(
@@ -19,6 +21,7 @@ cc_library(
 			  "@abseil-cpp//absl/status:status",
 				"@abseil-cpp//absl/status:statusor",
 				"//base:buffer",
+				":ssl",
 		],
 )
 

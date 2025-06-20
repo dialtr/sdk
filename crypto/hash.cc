@@ -3,6 +3,8 @@
 
 #include <openssl/evp.h>
 
+#include <iostream>
+
 #include "absl/log/check.h"
 #include "absl/status/status.h"
 #include "absl/status/statusor.h"
@@ -37,8 +39,11 @@ class HashImpl : public Hash {
 	}
 
 	// Update the hash with new data.
-  absl::Status Update(const void* data, size_t len) override {
-		return absl::OkStatus();
+  int Update(const void* data, size_t len) override {
+		DCHECK(ctx_ != nullptr);
+		const int status = EVP_DigestUpdate(ctx_, data, len);
+		std::cout << "EVP_DigestUpdate(): Returned: " << status << std::endl;
+		return status;
 	}
 
   // Finish the hashing operation. Updates are no longer possible.
@@ -49,6 +54,8 @@ class HashImpl : public Hash {
 
   // Destroty the hash.
   ~HashImpl() override {
+		DCHECK(ctx_ != nullptr);
+		EVP_MD_CTX_free(ctx_);
 	}
 
  private:
