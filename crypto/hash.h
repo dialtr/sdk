@@ -5,6 +5,8 @@
 #include "absl/status/status.h"
 #include "absl/status/statusor.h"
 
+#include "base/buffer.h"
+
 namespace sdk {
 namespace crypto {
 
@@ -19,24 +21,14 @@ class Hash {
   // Create a new Hash object with the specified options.
   static absl::StatusOr<Hash*> New(const Hash::Options& options);
 
-  // Destroty the hash.
-  ~Hash();
-
-  // No default ctor; copy / assignment not allowed.
-  Hash() = delete;
-  Hash(const Hash&) = delete;
-  Hash& operator=(const Hash&) = delete;
-
-  // TODO(tdial): Implement move constructor?
-  // TODO(tdial): Implement move assignment?
-
-  // Update the hash with new data.
-  absl::Status Update(const void* data, size_t len);
+	// Update the hash with new data.
+  virtual absl::Status Update(const void* data, size_t len) = 0;
 
   // Finish the hashing operation. Updates are no longer possible.
-  absl::Status Finalize();
+  virtual absl::StatusOr<sdk::base::Buffer> Finalize() = 0;
 
- private:
+  // Destroty the hash.
+  virtual ~Hash() = 0;
 };
 
 }  // namespace crypto

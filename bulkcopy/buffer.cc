@@ -2,5 +2,7 @@
 #include "bulkcopy/buffer.h"
 
 namespace sdk {
-namespace bulkcopy {}  // namespace bulkcopy
+namespace bulkcopy {
+//
+}  // namespace bulkcopy
 }  // namespace sdk

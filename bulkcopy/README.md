@@ -22,3 +22,9 @@ be restarted, retried, etc.
   mount -t cifs   # should succeed without error
   fuser           # should run and display message
 
+  # Example mount command
+  sudo mount -t cifs -o credentials=credentials-file.txt //192.168.0.1/foo /mnt/foo
+
+
+
+

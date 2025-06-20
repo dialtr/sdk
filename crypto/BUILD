@@ -18,6 +18,7 @@ cc_library(
   			"@abseil-cpp//absl/log:log",
 			  "@abseil-cpp//absl/status:status",
 				"@abseil-cpp//absl/status:statusor",
+				"//base:buffer",
 		],
 )
 
@@ -28,6 +29,7 @@ cc_library(
 				"@abseil-cpp//absl/log:log",
 			  "@abseil-cpp//absl/status:status",
 				"@abseil-cpp//absl/status:statusor",
+				"//base:buffer",
 				":hash",
 		],
 )
@@ -40,6 +42,7 @@ cc_test(
 		deps = [
 			  "@googletest//:gtest",
 				"@googletest//:gtest_main",
+				"//base:buffer",
 				":hash",
 		]
 )

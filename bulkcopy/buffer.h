@@ -7,7 +7,9 @@
 #include <list>
 
 namespace sdk {
-namespace bulkcopy {}  // namespace bulkcopy
+namespace bulkcopy {
+	//
+}  // namespace bulkcopy
 }  // namespace sdk
 
 #endif  // BULKCOPY_BUFFER_H_
