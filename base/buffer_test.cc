@@ -13,6 +13,11 @@ TEST(BufferTest, DefaultConstruction) {
   EXPECT_EQ(0, b.Size());
 }
 
+TEST(BufferTest, SizeConstruction) {
+  Buffer b(10);
+  EXPECT_EQ(10, b.Size());
+}
+
 TEST(BufferTest, DataConstruction) {
   char data[4] = {'a', 'b', 'c', 'd'};
   Buffer b(data, 4);
@@ -79,6 +84,13 @@ TEST(BufferTest, MoveAssignment) {
   for (int i = 0; i < 4; ++i) {
     EXPECT_EQ(data[i], copy_ptr[i]);
   }
+}
+
+TEST(BufferTest, Append) {
+  Buffer b;
+  char data[4] = {'a', 'b', 'c', 'd'};
+  b.Append(data, 4);
+  EXPECT_EQ(4, b.Size());
 }
 
 TEST(BufferTest, ToHex) {

@@ -4,7 +4,6 @@
 
 #include "absl/status/status.h"
 #include "absl/status/statusor.h"
-
 #include "base/buffer.h"
 
 namespace sdk {
@@ -21,14 +20,14 @@ class Hash {
   // Create a new Hash object with the specified options.
   static absl::StatusOr<Hash*> New(const Hash::Options& options);
 
-	// Update the hash with new data.
-  virtual int Update(const void* data, size_t len) = 0;
+  // Update the hash with new data.
+  virtual bool Update(const void* data, size_t len) = 0;
 
   // Finish the hashing operation. Updates are no longer possible.
   virtual absl::StatusOr<sdk::base::Buffer> Finalize() = 0;
 
   // Destroty the hash.
-  virtual ~Hash() = 0;
+  virtual ~Hash() = default;
 };
 
 }  // namespace crypto

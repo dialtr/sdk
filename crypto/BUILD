@@ -1,9 +1,3 @@
-cc_import(
-	name = "ssl",
-	alwayslink = True,
-	system_provided = True,
-)
-
 cc_library(
 	  visibility = [
 			"//visibility:public",
@@ -21,19 +15,6 @@ cc_library(
 			  "@abseil-cpp//absl/status:status",
 				"@abseil-cpp//absl/status:statusor",
 				"//base:buffer",
-				":ssl",
-		],
-)
-
-cc_library(
-    name = "crypto",
-		deps = [
-			  "@abseil-cpp//absl/log:check",
-				"@abseil-cpp//absl/log:log",
-			  "@abseil-cpp//absl/status:status",
-				"@abseil-cpp//absl/status:statusor",
-				"//base:buffer",
-				":hash",
 		],
 )
 
@@ -45,7 +26,10 @@ cc_test(
 		deps = [
 			  "@googletest//:gtest",
 				"@googletest//:gtest_main",
-				"//base:buffer",
 				":hash",
-		]
+		],
+		linkopts = [
+			"-lssl",
+			"-lcrypto",
+		],
 )

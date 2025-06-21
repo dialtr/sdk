@@ -15,6 +15,8 @@ namespace base {
 
 Buffer::Buffer() {}
 
+Buffer::Buffer(size_t size) { data_.resize(size); }
+
 Buffer::Buffer(const void* data, size_t count) {
   DCHECK(data != nullptr);
   data_.resize(count);
@@ -50,6 +52,13 @@ Buffer& Buffer::Append(unsigned char byte) {
   return *this;
 }
 
+Buffer& Buffer::Resize(size_t new_size) {
+  data_.resize(new_size);
+  return *this;
+}
+
+void* Buffer::Data() { return reinterpret_cast<void*>(&data_[0]); }
+
 const void* Buffer::Data() const {
   const unsigned char* const data = &data_[0];
   return reinterpret_cast<const void*>(data);
@@ -61,7 +70,7 @@ std::string Buffer::ToHex() const { return sdk::base::ToHex(Data(), Size()); }
 
 std::string ToHex(const void* data, size_t size) {
   static const char table[] = {'0', '1', '2', '3', '4', '5', '6', '7',
-                               '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+                               '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
   DCHECK(data);
   const unsigned char* p = reinterpret_cast<const unsigned char*>(data);
   std::stringstream ss;

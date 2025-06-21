@@ -13,6 +13,9 @@ class Buffer {
   // Construct empty.
   Buffer();
 
+  // Construct empty with a specific size.
+  explicit Buffer(size_t size);
+
   // Construct with data.
   Buffer(const void* data, size_t count);
 
@@ -34,7 +37,13 @@ class Buffer {
   // Append a byte.
   Buffer& Append(unsigned char byte);
 
-  // Return a pointer to the data.
+  // Resize the buffer.
+  Buffer& Resize(size_t new_size);
+
+  // Return a pointer to the data (non-const.)
+  void* Data();
+
+  // Return a pointer to the data (const.)
   const void* Data() const;
 
   // Return the size of the data.
